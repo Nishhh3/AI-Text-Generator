@@ -1,8 +1,3 @@
-"""
-AI Text Generator with Sentiment Analysis
-A Streamlit application that generates text based on sentiment analysis.
-"""
-
 import streamlit as st
 from models import SentimentTextGenerator
 import time
@@ -14,7 +9,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for better UI
 st.markdown("""
     <style>
     .main-header {
@@ -45,14 +39,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Initialize the model (cached to avoid reloading)
+# Initialize the model 
 @st.cache_resource
 def load_models():
     """Load and cache the models."""
     return SentimentTextGenerator()
 
 def main():
-    # Header
+    
     st.markdown('<div class="main-header">✨ AI Text Generator</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Generate sentiment-aligned text using AI</div>', unsafe_allow_html=True)
     
@@ -102,7 +96,7 @@ def main():
         help="Higher values make output more creative but less focused"
     )
     
-    # Main content area
+    
     col1, col2 = st.columns([1, 1])
     
     with col1:
@@ -120,7 +114,7 @@ def main():
         st.subheader("📄 Generated Output")
         output_container = st.container()
     
-    # Generate text when button is clicked
+    
     if generate_button:
         if not user_prompt.strip():
             st.warning("⚠️ Please enter a prompt first!")
@@ -158,7 +152,7 @@ def main():
                     with output_container:
                         st.markdown("**Generated Text:**")
                         
-                        # Color code based on sentiment
+                        
                         sentiment_class = f"sentiment-{detected_sentiment}"
                         st.markdown(f'<div class="{sentiment_class}">', unsafe_allow_html=True)
                         st.write(generated_text)
@@ -200,7 +194,7 @@ def main():
         - Try both auto-detect and manual sentiment modes
         """)
     
-    # Footer
+   
     st.markdown("---")
     st.markdown(
         "<div style='text-align: center; color: #666;'>Built with Streamlit & Hugging Face Transformers</div>",
